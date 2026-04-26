@@ -43,20 +43,26 @@ def packet_callback(pkt) :
 ## for each packet the above function will run 
 
 @app.post('/api/start')
-def start_monitoring() :
+def start_monitoring():
     global sniffer_instance
-    if sniffer_instance is None and not sniffer_instance.running():
-        sniffer_instance = AsyncSniffer(prc=packet_callback , store=False)
-    # this store = False saves the memory otherwise it will store it in memory
+    # Fix 1: Safer check. If it doesn't exist OR it's not running, start it.
+    if sniffer_instance is None or not sniffer_instance.running:
+        # Fix 2: Changed 'prc' to 'prn'
+        sniffer_instance = AsyncSniffer(prn=packet_callback, store=False)
         sniffer_instance.start()
-    return {"message" : "Packet Sniffing stated ...."}
+        return {"message": "Packet Sniffing started...."}
+    
+    return {"message": "Sniffer is already running."}
 
 @app.post('/api/stop')
 def stop_monitoring():
     global sniffer_instance
-    if sniffer_instance and sniffer_instance.running():
+    # Fix 3: Removed () from .running
+    if sniffer_instance and sniffer_instance.running:
         sniffer_instance.stop()
-    return {"message" : "Packet Sniffing stopped ..."}
+        return {"message": "Packet Sniffing stopped..."}
+    
+    return {"message": "Sniffer is not running."}
 
 @app.post('/api/reset')
 def reset():
