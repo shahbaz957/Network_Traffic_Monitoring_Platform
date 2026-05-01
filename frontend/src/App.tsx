@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-/* ─── Only what Tailwind cannot express: fonts, keyframes, pseudo-elements ─── */
 const minimalStyles = `
   @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@400;500;600;700&display=swap');
 
@@ -57,7 +56,7 @@ function App() {
   const [isStart, setIsStart] = useState<boolean>(false);
 
   useEffect(() => {
-    let timer;
+    let timer : number;
     if (isStart) {
       timer = setInterval(async () => {
         try {
