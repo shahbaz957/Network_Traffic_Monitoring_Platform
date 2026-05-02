@@ -44,9 +44,9 @@ def stop():
     return {"message" : sniffer.stop()}
 
 
-@app.post('api/reset')
+@app.post('/api/reset')
 def reset():
-    store.reset
+    store.reset()
     return {"message" : "Cleared"}
 
 @app.get('/api/status')
@@ -57,7 +57,7 @@ def status():
     }
 
 
-@app.get('/api/packet/new')
+@app.get('/api/packets/new')
 def get_new_packet():
     ## Frontend will poll to this for every 500 ms and get the newly sniffed packets
     ## and after every get sniffed new packet list got refereshed 
@@ -66,7 +66,7 @@ def get_new_packet():
     store.new_packets.clear()
     return new
 
-@app.get('/api/packet/all')
+@app.get('/api/packets')
 def get_all_packets(): 
     return store.all_packets
 
@@ -128,6 +128,7 @@ async def import_csv(file: UploadFile = File(...)):
         row["src_port"] = int(row["src_port"]) if row.get("src_port", "").isdigit() else None
         row["dst_port"] = int(row["dst_port"]) if row.get("dst_port", "").isdigit() else None
         store.add(row)
+    store.new_packets.clear() 
 
     return {"message": f"Loaded {len(store.all_packets)} packets"}
 

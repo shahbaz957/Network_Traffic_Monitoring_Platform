@@ -56,12 +56,15 @@ def on_packet(pkt):
         "service":  service,
     })
 
-def start(interface= None):
+def start(interface=None):
     global sniffer
     if sniffer and sniffer.running:
         return "Already Running"
-    kwargs = {"prn" : on_packet , "store" : False , "filter" : "ip"}
+    kwargs = {"prn": on_packet, "store": False, "filter": "ip"}
+    if interface:
+        kwargs["iface"] = interface    # pass selected interface
     sniffer = AsyncSniffer(**kwargs)
+    sniffer.start()                    # actually start it
     return "Started"
 
 def stop():
