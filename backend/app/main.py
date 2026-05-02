@@ -19,6 +19,7 @@ app.add_middleware(
 )
 
 class StartPar(BaseModel):
+    # model for getting the interface adn it will apply the validation on it
     interface : str = None # default value of interface is None
 
 
