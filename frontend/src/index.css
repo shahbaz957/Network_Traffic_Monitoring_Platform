@@ -110,3 +110,28 @@ code {
   padding: 4px 8px;
   background: var(--code-bg);
 } */
+ *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body, #root { height: 100%; }
+
+body {
+  background: #020d05;
+  color: #e2e8f0;
+  font-family: 'Courier New', Courier, monospace;
+  overflow: hidden;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar       { width: 5px; }
+::-webkit-scrollbar-track { background: rgba(0,0,0,0.3); }
+::-webkit-scrollbar-thumb { background: rgba(34,197,94,0.3); border-radius: 2px; }
+
+/* Button hover */
+button:hover:not(:disabled) { opacity: 0.8; }
+button:disabled { opacity: 0.4; cursor: not-allowed; }
+
+/* Input focus */
+input:focus, select:focus {
+  outline: none;
+  border-color: rgba(34,197,94,0.6) !important;
+}
