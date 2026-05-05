@@ -3,6 +3,8 @@
 > A real-time network packet capture and analysis platform built as a semester project for the Computer Networks course at PUCIT. Inspired by Wireshark.
 
 ---
+<img width="960" height="534" alt="image" src="https://github.com/user-attachments/assets/50f5a1a0-e55d-4870-af5c-69fe1a9ae273" />
+
 
 ## What is NetWatch?
 
